@@ -12,7 +12,7 @@
 * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 * See the GNU Lesser General Public License for more details.
 *
-* Copyright (c) 2002-2019 Hitachi Vantara..  All rights reserved.
+* Copyright (c) 2002-2017 Hitachi Vantara..  All rights reserved.
 */
 
 package org.pentaho.di.ui.verticabulkload;
@@ -122,7 +122,7 @@ public class VerticaBulkLoaderDialog extends BaseStepDialog implements StepDialo
 
   private Label wlDirect;
   private Button wDirect;
-  private FormData fdlDirect, fdDirect;
+  private FormData fdlDirect, fdDirect, fdEnforcelength;
 
   private Label wlSpecifyFields;
   private Button wSpecifyFields;
@@ -342,7 +342,25 @@ public class VerticaBulkLoaderDialog extends BaseStepDialog implements StepDialo
     fdDirect.top = new FormAttachment( 0, margin );
     fdDirect.right = new FormAttachment( 100, 0 );
     wDirect.setLayoutData( fdDirect );
-    wDirect.addSelectionListener( lsSelMod );
+
+    // Checkbox for ENFORCELENGTH
+    wlDirect = new Label( wMainComp, SWT.RIGHT );
+    wlDirect.setText( BaseMessages.getString( PKG, "VerticaBulkLoaderDialog.Enforcelength.Label" ) );
+    wlDirect.setToolTipText( BaseMessages.getString( PKG, "VerticaBulkLoaderDialog.Enforcelength.Tooltip" ) );
+    props.setLook( wlDirect );
+    fdlDirect = new FormData();
+    fdlDirect.left = new FormAttachment( 0, 0 );
+    fdlDirect.top = new FormAttachment( 0, margin );
+    fdlDirect.right = new FormAttachment( middle, -margin );
+    wlDirect.setLayoutData( fdlDirect );
+    wDirect = new Button( wMainComp, SWT.CHECK );
+    wDirect.setToolTipText( BaseMessages.getString( PKG, "VerticaBulkLoaderDialog.Enforcelength.Tooltip" ) );
+    props.setLook( wDirect );
+    fdEnforcelength = new FormData();
+    fdEnforcelength.left = new FormAttachment( middle, 0 );
+    fdEnforcelength.top = new FormAttachment( 0, margin );
+    fdEnforcelength.right = new FormAttachment( 100, 0 );
+    wDirect.setLayoutData( fdEnforcelength );
 
     // Abort on error
     wlAbortOnError = new Label( wMainComp, SWT.RIGHT );
@@ -362,7 +380,6 @@ public class VerticaBulkLoaderDialog extends BaseStepDialog implements StepDialo
     fdAbortOnError.top = new FormAttachment( wDirect, margin );
     fdAbortOnError.right = new FormAttachment( 100, 0 );
     wAbortOnError.setLayoutData( fdAbortOnError );
-    wAbortOnError.addSelectionListener( lsSelMod );
 
     // ExceptionsLogFile line...
     wlExceptionsLogFile = new Label( wMainComp, SWT.RIGHT );
